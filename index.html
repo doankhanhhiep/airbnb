@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>HM Homestay — Modern</title>
+<meta name="description" content="Book modern, comfortable homestays in Toronto via Airbnb.">
+<meta name="keywords" content="homestay, Toronto, Airbnb, vacation rental">
+<meta property="og:title" content="HM Homestay">
+<meta property="og:description" content="Comfortable stays in Toronto, book securely via Airbnb.">
+<meta property="og:image" content="images/listing1_hero.jpg">
+<link rel="icon" href="images/favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --accent-2: #06b6d4;
+  --radius: 12px;
+  --glass: rgba(255,255,255,0.6);
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+  background: var(--bg);
+  color: #0f172a;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+.site { max-width: 1200px; margin: 40px auto; padding: 24px; position: relative; }
+.lang-select { position: absolute; top: 24px; right: 24px; padding: 8px 12px; border-radius: 8px; border: 1px solid #e6e9ef; font-size: 14px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 14px; }
+.logo {
+  width: 56px; height: 56px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), #7c3aed);
+  display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;
+  transition: transform 0.3s ease;
+}
+.logo:hover { transform: rotate(5deg); }
+.brand h1 { font-size: 24px; margin: 0; font-weight: 700; }
+.brand p { margin: 0; font-size: 13px; color: var(--muted); font-weight: 400; }
+.actions { display: flex; gap: 12px; align-items: center; }
+.pill { background: white; padding: 8px 14px; border-radius: 999px; box-shadow: 0 6px 18px rgba(16,24,40,0.06); font-size: 13px; }
+.hero { display: grid; grid-template-columns: 1fr 360px; gap: 40px; margin-top: 40px; }
+.hero-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
+  border-radius: var(--radius); padding: 24px; box-shadow: 0 12px 40px rgba(16,24,40,0.08);
+}
+.hero-right { display: flex; flex-direction: column; gap: 24px; }
+.hero-title { font-size: 28px; margin: 0 0 10px; font-weight: 700; }
+.hero-desc { color: var(--muted); margin: 0 0 16px; font-weight: 400; font-size: 15px; }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px; }
+.card {
+  background: var(--card); border-radius: var(--radius); overflow: hidden;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.06); display: flex; flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px rgba(16,24,40,0.12); }
+.card-media { height: 240px; background-size: cover; background-position: center; cursor: pointer; position: relative; transition: transform 0.2s; }
+.card-media:hover { transform: scale(1.03); }
+.card-body { padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+.card-title { font-weight: 700; font-size: 18px; }
+.card-sub { color: var(--muted); font-size: 14px; font-weight: 400; }
+.meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+.tag { background: #f3f4f6; padding: 6px 12px; border-radius: 999px; font-size: 13px; color: #111; }
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.date-input { padding: 10px; border-radius: 8px; border: 1px solid #e6e9ef; background: white; font-size: 14px; }
+.date-input:focus { outline: none; border: 2px solid var(--accent); }
+.btn {
+  background: var(--accent); color: white; padding: 12px 18px; border-radius: 8px;
+  border: none; cursor: pointer; font-weight: 600; font-size: 14px; transition: background 0.2s, transform 0.1s;
+}
+.btn:hover { background: #1e40af; }
+.btn:active { transform: scale(0.98); }
+.btn.ghost { background: transparent; border: 1px solid #e6e9ef; color: var(--muted); }
+.btn.ghost:hover { background: #f3f4f6; }
+.gallery { display: flex; gap: 10px; overflow: auto; padding: 12px; scroll-snap-type: x mandatory; }
+.gallery img { height: 100px; border-radius: 10px; object-fit: cover; cursor: pointer; scroll-snap-align: start; transition: box-shadow 0.2s; }
+.gallery img:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.contact { margin-top: 40px; background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95)); padding: 24px; border-radius: var(--radius); }
+.contact h3 { margin: 0; font-size: 20px; font-weight: 700; }
+.contact p { margin: 8px 0; color: var(--muted); font-size: 15px; }
+.contact .btn { display: inline-flex; align-items: center; gap: 8px; }
+.host-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); display: none; transition: opacity 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+.host-name:hover .avatar, .cohost-name:hover .avatar { display: block; }
+.avatar-tooltip { position: absolute; top: -70px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 4px 8px; border-radius: 6px; font-size: 11px; white-space: nowrap; display: none; }
+.host-name:hover .avatar-tooltip, .cohost-name:hover .avatar-tooltip { display: block; }
+.reviews { margin-top: 16px; }
+.review { display: flex; gap: 14px; padding: 14px; background: #f9fafb; border-radius: 10px; margin-bottom: 10px; border: 1px solid #e6e9ef; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.review.hidden { display: none; }
+.review .avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+.review .content { flex: 1; }
+.review .name { font-weight: 600; font-size: 15px; margin: 0; }
+.review .date { font-size: 13px; color: var(--muted); margin: 2px 0; }
+.review .stars { display: flex; gap: 2px; }
+.review .star { width: 14px; height: 14px; color: #facc15; transition: transform 0.2s; }
+.review .star:hover { transform: scale(1.1); }
+.review .text { font-size: 14px; margin: 8px 0 0; }
+.show-more { background: transparent; border: 1px solid #e6e9ef; color: var(--muted); padding: 8px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; transition: background 0.2s; }
+.show-more:hover { background: #f3f4f6; }
+footer { margin-top: 40px; text-align: center; color: var(--muted); font-size: 14px; padding: 20px 0; }
+.super { display: inline-block; background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: white; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 12px; }
+@media (max-width: 980px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { gap: 20px; }
+  .grid { grid-template-columns: 1fr; }
+  .contact { padding: 20px; }
+  .actions { display: none; }
+  .row { flex-direction: column; align-items: stretch; }
+  .card-title { font-size: 18px; }
+  .tag { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<select class="lang-select" id="lang-select">
+  <option value="en">English</option>
+  <option value="fr">Français</option>
+  <option value="vi">Tiếng Việt</option>
+</select>
+
+<div class="site">
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">HM</div>
+      <div>
+        <h1 data-i18n="brand.title">HM Homestay</h1>
+        <p data-i18n="brand.subtitle">Comfortable stays • Toronto</p>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="pill" data-i18n="actions.superhost">⭐ Superhost • 4.9</div>
+      <div class="pill" data-i18n="actions.location">📍 Toronto</div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-card">
+      <h2 class="hero-title" data-i18n="hero.title">Two beautiful homes — book via Airbnb</h2>
+      <p class="hero-desc" data-i18n="hero.desc">Choose your dates below to check price and availability. Booking and payment are securely handled on Airbnb.</p>
+      <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap">
+        <div class="tag" data-i18n="hero.tags.0">3+ bedrooms</div>
+        <div class="tag" data-i18n="hero.tags.1">Free parking</div>
+        <div class="tag" data-i18n="hero.tags.2">Near airport</div>
+        <div class="tag" data-i18n="hero.tags.3">Self check-in</div>
+      </div>
+      <div style="margin-top:20px;display:flex;gap:10px;align-items:center" class="row">
+        <input id="global-checkin" class="date-input" type="date">
+        <input id="global-checkout" class="date-input" type="date">
+        <button id="global-check" class="btn" data-i18n="hero.check">Check all listings</button>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div style="background:linear-gradient(180deg,#ffffff,#f8fafc);padding:16px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.08)">
+        <h3 data-i18n="help.title">Need help?</h3>
+        <p data-i18n="help.desc">Message us or call +1 (234) 567-890</p>
+        <a href="mailto:contact@hmhomestay.com" class="btn" data-i18n="help.contact">✉️ Contact host</a>
+      </div>
+      <div class="right">
+        <div style="background:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(2,6,23,0.08)">
+          <div style="font-size:12px;color:var(--muted)" data-i18n="contact.hostLabel">Host</div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <img src="images/host.jpg" class="host-avatar">
+            <div style="font-weight:700" data-i18n="contact.hostName">HM Homestay</div>
+          </div>
+          <div style="margin-top:8px;color:var(--muted);font-size:13px" data-i18n="contact.response">Response time: within a few hours</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- Listing 1 -->
+    <article class="card" data-url="https://www.airbnb.ca/rooms/1353858002297494299"
+             data-images="images/listing1_hero.jpg,images/listing1_g1.jpg,images/listing1_g2.jpg,images/listing1_g3.jpg,images/listing1_g4.jpg,images/listing1_g5.jpg,images/listing1_g6.jpg,images/listing1_g7.jpg,images/listing1_g8.jpg,images/listing1_g9.jpg,images/listing1_g10.jpg,images/listing1_g11.jpg,images/listing1_g12.jpg">
+      <div class="card-media" style="background-image:url('images/listing1_hero.jpg')"></div>
+      <div class="card-body">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="card-title" data-i18n="listing1.title">3BR 3Bath — StockYards Area</div>
+            <div class="card-sub" data-i18n="listing1.subtitle">15 min to Pearson Airport • Family friendly</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <div class="host-name" style="position:relative;">
+              Helena
+              <img src="images/avatar1.jpg" class="avatar">
+              <div class="avatar-tooltip" data-i18n="listing1.host">Helena • Superhost 4.9</div>
+            </div>
+            <div class="cohost-name" style="position:relative;">
+              Amy Luu
+              <img src="images/avatar2.jpg" class="avatar">
+              <div class="avatar-tooltip" data-i18n="listing1.cohost">Amy Luu • Co-host</div>
+            </div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="tag" data-i18n="listing1.tags.0">Up to 8 guests</div>
+          <div class="tag" data-i18n="listing1.tags.1">Free parking</div>
+          <div class="tag" data-i18n="listing1.tags.2">Fast Wi-Fi</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:10px" class="row">
+          <input class="date-input checkin" type="date" />
+          <input class="date-input checkout" type="date" />
+          <button class="btn check" data-i18n="listing1.check">Check</button>
+          <button class="btn book-now" data-i18n="listing1.book">Book Now</button>
+        </div>
+        <div class="gallery" style="margin-top:10px">
+          <img src="images/listing1_g1.jpg">
+          <img src="images/listing1_g2.jpg">
+          <img src="images/listing1_g3.jpg">
+          <img src="images/listing1_g4.jpg">
+          <img src="images/listing1_g5.jpg">
+          <img src="images/listing1_g6.jpg">
+          <img src="images/listing1_g7.jpg">
+          <img src="images/listing1_g8.jpg">
+          <img src="images/listing1_g9.jpg">
+          <img src="images/listing1_g10.jpg">
+          <img src="images/listing1_g11.jpg">
+          <img src="images/listing1_g12.jpg">
+        </div>
+        <div class="reviews">
+          <div class="review" data-review-id="listing1.reviews.0">
+            <img src="images/review1.jpg" class="avatar">
+            <div class="content">
+              <div class="name" data-i18n="listing1.reviews.0.name">Chen</div>
+              <div class="date" data-i18n="listing1.reviews.0.date">September 2025</div>
+              <div class="stars">
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+              </div>
+              <div class="text" data-i18n="listing1.reviews.0">The house is clean and spacious, the bed is soft and comfortable, the facilities are complete, and the response is timely. I will recommend it to friends who come to Toronto.</div>
+            </div>
+          </div>
+          <div class="review hidden" data-review-id="listing1.reviews.1">
+            <img src="images/review2.jpg" class="avatar">
+            <div class="content">
+              <div class="name" data-i18n="listing1.reviews.1.name">Cheng An</div>
+              <div class="date" data-i18n="listing1.reviews.1.date">September 2025</div>
+              <div class="stars">
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+              </div>
+              <div class="text" data-i18n="listing1.reviews.1">It’s great.</div>
+            </div>
+          </div>
+          <div class="review hidden" data-review-id="listing1.reviews.2">
+            <img src="images/review3.jpg" class="avatar">
+            <div class="content">
+              <div class="name" data-i18n="listing1.reviews.2.name">Edgardo</div>
+              <div class="date" data-i18n="listing1.reviews.2.date">September 2025</div>
+              <div class="stars">
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+              </div>
+              <div class="text" data-i18n="listing1.reviews.2">very pleased with our stay. very nice remodeled house.</div>
+            </div>
+          </div>
+          <button class="show-more" data-expanded="0" data-i18n="listing1.showMore">Show more reviews</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Listing 2 -->
+    <article class="card" data-url="https://www.airbnb.ca/rooms/1143578560927127620"
+             data-images="images/listing2_hero.jpg,images/listing2_g1.jpg,images/listing2_g2.jpg,images/listing2_g3.jpg,images/listing2_g4.jpg,images/listing2_g5.jpg,images/listing2_g6.jpg,images/listing2_g7.jpg,images/listing2_g8.jpg,images/listing2_g9.jpg,images/listing2_g10.jpg,images/listing2_g11.jpg,images/listing2_g12.jpg">
+      <div class="card-media" style="background-image:url('images/listing2_hero.jpg')"></div>
+      <div class="card-body">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="card-title" data-i18n="listing2.title">Private 2Beds — Humber Valley</div>
+            <div class="card-sub" data-i18n="listing2.subtitle">Cozy, quiet neighborhood • 10 min to airport</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <div class="host-name" style="position:relative;">
+              Amy Luu
+              <img src="images/avatar2.jpg" class="avatar">
+              <div class="avatar-tooltip" data-i18n="listing2.host">Amy Luu • Superhost 4.9</div>
+            </div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="tag" data-i18n="listing2.tags.0">2 bedrooms</div>
+          <div class="tag" data-i18n="listing2.tags.1">Great reviews</div>
+          <div class="tag" data-i18n="listing2.tags.2">Easy check-in</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:10px" class="row">
+          <input class="date-input checkin" type="date" />
+          <input class="date-input checkout" type="date" />
+          <button class="btn check" data-i18n="listing2.check">Check</button>
+          <button class="btn book-now" data-i18n="listing2.book">Book Now</button>
+        </div>
+        <div class="gallery" style="margin-top:10px">
+          <img src="images/listing2_g1.jpg">
+          <img src="images/listing2_g2.jpg">
+          <img src="images/listing2_g3.jpg">
+          <img src="images/listing2_g4.jpg">
+          <img src="images/listing2_g5.jpg">
+          <img src="images/listing2_g6.jpg">
+          <img src="images/listing2_g7.jpg">
+          <img src="images/listing2_g8.jpg">
+          <img src="images/listing2_g9.jpg">
+          <img src="images/listing2_g10.jpg">
+          <img src="images/listing2_g11.jpg">
+          <img src="images/listing2_g12.jpg">
+        </div>
+        <div class="reviews">
+          <div class="review" data-review-id="listing2.reviews.0">
+            <img src="images/review4.jpg" class="avatar">
+            <div class="content">
+              <div class="name" data-i18n="listing2.reviews.0.name">Zeyad</div>
+              <div class="date" data-i18n="listing2.reviews.0.date">October 2025</div>
+              <div class="stars">
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+              </div>
+              <div class="text" data-i18n="listing2.reviews.0">Amy was such a gracious and welcoming host! We made a couple requests to help make our stay even easier with timing and with the amount of bags we had, and she was extremely responsive and accommodating of our every request and always checked in to see if we wanted anything else!</div>
+            </div>
+          </div>
+          <div class="review hidden" data-review-id="listing2.reviews.1">
+            <img src="images/review5.jpg" class="avatar">
+            <div class="content">
+              <div class="name" data-i18n="listing2.reviews.1.name">Brad</div>
+              <div class="date" data-i18n="listing2.reviews.1.date">October 2025</div>
+              <div class="stars">
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+              </div>
+              <div class="text" data-i18n="listing2.reviews.1">Very beautiful home, with secluded basement that didn't feel like a basement. Unit was exceptionally clean and was comfortable and content immediately. Unit had everything we needed and more. Would definitely stay again.</div>
+            </div>
+          </div>
+          <button class="show-more" data-expanded="0" data-i18n="listing2.showMore">Show more reviews</button>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="contact">
+    <h3 data-i18n="contact.title">Have questions before booking?</h3>
+    <p data-i18n="contact.desc">We reply fast — send a message or call us. All reservations are handled via Airbnb for your security.</p>
+    <div style="display:flex;gap:10px;margin-top:12px">
+      <a href="mailto:contact@hmhomestay.com" class="btn" style="background:linear-gradient(90deg,var(--accent),var(--accent-2))" data-i18n="contact.email">✉️ Email Host</a>
+      <a href="tel:+1234567890" class="btn ghost" data-i18n="contact.call">📞 Call</a>
+    </div>
+  </div>
+
+  <footer>
+    <div data-i18n="footer">© HM Homestay — Booking securely through Airbnb</div>
+  </footer>
+</div>
+
+<script>
+// Language texts
+const texts = {
+  en: {
+    'brand.title': 'HM Homestay',
+    'brand.subtitle': 'Comfortable stays • Toronto',
+    'actions.superhost': '⭐ Superhost • 4.9',
+    'actions.location': '📍 Toronto',
+    'hero.title': 'Two beautiful homes — book via Airbnb',
+    'hero.desc': 'Choose your dates below to check price and availability. Booking and payment are securely handled on Airbnb.',
+    'hero.tags.0': '3+ bedrooms',
+    'hero.tags.1': 'Free parking',
+    'hero.tags.2': 'Near airport',
+    'hero.tags.3': 'Self check-in',
+    'hero.check': 'Check all listings',
+    'help.title': 'Need help?',
+    'help.desc': 'Message us or call +1 (234) 567-890',
+    'help.contact': 'Contact host',
+    'listing1.title': '3BR 3Bath — StockYards Area',
+    'listing1.subtitle': '15 min to Pearson Airport • Family friendly',
+    'listing1.host': 'Helena • Superhost 4.9',
+    'listing1.cohost': 'Amy Luu • Co-host',
+    'listing1.tags.0': 'Up to 8 guests',
+    'listing1.tags.1': 'Free parking',
+    'listing1.tags.2': 'Fast Wi-Fi',
+    'listing1.check': 'Check',
+    'listing1.book': 'Book Now',
+    'listing1.reviews.0.name': 'Chen',
+    'listing1.reviews.0.date': 'September 2025',
+    'listing1.reviews.0': 'The house is clean and spacious, the bed is soft and comfortable, the facilities are complete, and the response is timely. I will recommend it to friends who come to Toronto.',
+    'listing1.reviews.1.name': 'Cheng An',
+    'listing1.reviews.1.date': 'September 2025',
+    'listing1.reviews.1': 'It’s great.',
+    'listing1.reviews.2.name': 'Edgardo',
+    'listing1.reviews.2.date': 'September 2025',
+    'listing1.reviews.2': 'very pleased with our stay. very nice remodeled house.',
+    'listing1.showMore': 'Show more reviews',
+    'listing1.showFewer': 'Show fewer reviews',
+    'listing2.title': 'Private 2Beds — Humber Valley',
+    'listing2.subtitle': 'Cozy, quiet neighborhood • 10 min to airport',
+    'listing2.host': 'Amy Luu • Superhost 4.9',
+    'listing2.tags.0': '2 bedrooms',
+    'listing2.tags.1': 'Great reviews',
+    'listing2.tags.2': 'Easy check-in',
+    'listing2.check': 'Check',
+    'listing2.book': 'Book Now',
+    'listing2.reviews.0.name': 'Zeyad',
+    'listing2.reviews.0.date': 'October 2025',
+    'listing2.reviews.0': 'Amy was such a gracious and welcoming host! We made a couple requests to help make our stay even easier with timing and with the amount of bags we had, and she was extremely responsive and accommodating of our every request and always checked in to see if we wanted anything else!',
+    'listing2.reviews.1.name': 'Brad',
+    'listing2.reviews.1.date': 'October 2025',
+    'listing2.reviews.1': 'Very beautiful home, with secluded basement that didn\'t feel like a basement. Unit was exceptionally clean and was comfortable and content immediately. Unit had everything we needed and more. Would definitely stay again.',
+    'listing2.showMore': 'Show more reviews',
+    'listing2.showFewer': 'Show fewer reviews',
+    'contact.title': 'Have questions before booking?',
+    'contact.desc': 'We reply fast — send a message or call us. All reservations are handled via Airbnb for your security.',
+    'contact.email': 'Email Host',
+    'contact.call': 'Call',
+    'contact.hostLabel': 'Host',
+    'contact.hostName': 'HM Homestay',
+    'contact.response': 'Response time: within a few hours',
+    'footer': '© HM Homestay — Booking securely through Airbnb'
+  },
+  fr: {
+    'brand.title': 'HM Homestay',
+    'brand.subtitle': 'Séjours confortables • Toronto',
+    'actions.superhost': '⭐ Superhôte • 4.9',
+    'actions.location': '📍 Toronto',
+    'hero.title': 'Deux belles maisons — réservez via Airbnb',
+    'hero.desc': 'Choisissez vos dates ci-dessous pour vérifier les prix et disponibilités. Réservations sécurisées sur Airbnb.',
+    'hero.tags.0': '3+ chambres',
+    'hero.tags.1': 'Parking gratuit',
+    'hero.tags.2': 'Proche de l’aéroport',
+    'hero.tags.3': 'Arrivée autonome',
+    'hero.check': 'Vérifier tous les listings',
+    'help.title': 'Besoin d’aide ?',
+    'help.desc': 'Envoyez-nous un message ou appelez au +1 (234) 567-890',
+    'help.contact': 'Contacter l’hôte',
+    'listing1.title': '3 ch. 3 sdb — StockYards',
+    'listing1.subtitle': '15 min de l’aéroport Pearson • Familial',
+    'listing1.host': 'Helena • Superhôte 4.9',
+    'listing1.cohost': 'Amy Luu • Co-hôte',
+    'listing1.tags.0': 'Jusqu’à 8 invités',
+    'listing1.tags.1': 'Parking gratuit',
+    'listing1.tags.2': 'Wi-Fi rapide',
+    'listing1.check': 'Vérifier',
+    'listing1.book': 'Réserver',
+    'listing1.reviews.0.name': 'Chen',
+    'listing1.reviews.0.date': 'Septembre 2025',
+    'listing1.reviews.0': 'La maison est propre et spacieuse, le lit est doux et confortable, les équipements sont complets et la réponse est rapide. Je la recommanderai à mes amis qui viendront à Toronto.',
+    'listing1.reviews.1.name': 'Cheng An',
+    'listing1.reviews.1.date': 'Septembre 2025',
+    'listing1.reviews.1': 'C’est super.',
+    'listing1.reviews.2.name': 'Edgardo',
+    'listing1.reviews.2.date': 'Septembre 2025',
+    'listing1.reviews.2': 'Très satisfait de notre séjour. Très belle maison rénovée.',
+    'listing1.showMore': 'Voir plus d’avis',
+    'listing1.showFewer': 'Voir moins d’avis',
+    'listing2.title': '2 lits privés — Humber Valley',
+    'listing2.subtitle': 'Quartier calme • 10 min de l’aéroport',
+    'listing2.host': 'Amy Luu • Superhôte 4.9',
+    'listing2.tags.0': '2 chambres',
+    'listing2.tags.1': 'Excellents avis',
+    'listing2.tags.2': 'Arrivée facile',
+    'listing2.check': 'Vérifier',
+    'listing2.book': 'Réserver',
+    'listing2.reviews.0.name': 'Zeyad',
+    'listing2.reviews.0.date': 'Octobre 2025',
+    'listing2.reviews.0': 'Amy était une hôte très gracieuse et accueillante ! Nous avons fait quelques demandes pour faciliter notre séjour avec les horaires et la quantité de bagages, et elle a été extrêmement réactive et accommodante pour chaque demande, vérifiant toujours si nous voulions autre chose !',
+    'listing2.reviews.1.name': 'Brad',
+    'listing2.reviews.1.date': 'Octobre 2025',
+    'listing2.reviews.1': 'Très belle maison, avec un sous-sol isolé qui ne ressemblait pas à un sous-sol. L\'unité était exceptionnellement propre et confortable dès notre arrivée. L\'unité avait tout ce dont nous avions besoin et plus encore. Je séjournerais certainement à nouveau.',
+    'listing2.showMore': 'Voir plus d’avis',
+    'listing2.showFewer': 'Voir moins d’avis',
+    'contact.title': 'Des questions avant de réserver ?',
+    'contact.desc': 'Réponse rapide — envoyez un message ou appelez-nous. Réservations sécurisées via Airbnb.',
+    'contact.email': 'Contacter l’hôte',
+    'contact.call': 'Appeler',
+    'contact.hostLabel': 'Hôte',
+    'contact.hostName': 'HM Homestay',
+    'contact.response': 'Temps de réponse : quelques heures',
+    'footer': '© HM Homestay — Réservations sécurisées via Airbnb'
+  },
+  vi: {
+    'brand.title': 'HM Homestay',
+    'brand.subtitle': 'Chỗ ở thoải mái • Toronto',
+    'actions.superhost': '⭐ Chủ nhà xuất sắc • 4.9',
+    'actions.location': '📍 Toronto',
+    'hero.title': 'Hai ngôi nhà đẹp — đặt qua Airbnb',
+    'hero.desc': 'Chọn ngày để kiểm tra giá và tình trạng phòng. Đặt phòng an toàn qua Airbnb.',
+    'hero.tags.0': '3+ phòng ngủ',
+    'hero.tags.1': 'Đỗ xe miễn phí',
+    'hero.tags.2': 'Gần sân bay',
+    'hero.tags.3': 'Tự nhận phòng',
+    'hero.check': 'Kiểm tra tất cả',
+    'help.title': 'Cần hỗ trợ?',
+    'help.desc': 'Liên hệ chúng tôi qua email hoặc gọi +1 (234) 567-890',
+    'help.contact': 'Liên hệ chủ nhà',
+    'listing1.title': '3PN 3WC — Khu StockYards',
+    'listing1.subtitle': '15 phút đến sân bay Pearson • Thân thiện gia đình',
+    'listing1.host': 'Helena • Chủ nhà xuất sắc 4.9',
+    'listing1.cohost': 'Amy Luu • Đồng chủ nhà',
+    'listing1.tags.0': 'Tối đa 8 khách',
+    'listing1.tags.1': 'Đỗ xe miễn phí',
+    'listing1.tags.2': 'Wi-Fi nhanh',
+    'listing1.check': 'Kiểm tra',
+    'listing1.book': 'Đặt ngay',
+    'listing1.reviews.0.name': 'Chen',
+    'listing1.reviews.0.date': 'Tháng 9 2025',
+    'listing1.reviews.0': 'Ngôi nhà sạch sẽ và rộng rãi, giường mềm mại và thoải mái, tiện nghi đầy đủ, và phản hồi nhanh chóng. Tôi sẽ giới thiệu cho bạn bè đến Toronto.',
+    'listing1.reviews.1.name': 'Cheng An',
+    'listing1.reviews.1.date': 'Tháng 9 2025',
+    'listing1.reviews.1': 'Tuyệt vời.',
+    'listing1.reviews.2.name': 'Edgardo',
+    'listing1.reviews.2.date': 'Tháng 9 2025',
+    'listing1.reviews.2': 'Rất hài lòng với kỳ nghỉ của chúng tôi. Nhà rất đẹp sau khi cải tạo.',
+    'listing1.showMore': 'Xem thêm đánh giá',
+    'listing1.showFewer': 'Thu gọn đánh giá',
+    'listing2.title': '2 Giường riêng — Humber Valley',
+    'listing2.subtitle': 'Khu dân cư yên tĩnh • 10 phút đến sân bay',
+    'listing2.host': 'Amy Luu • Chủ nhà xuất sắc 4.9',
+    'listing2.tags.0': '2 phòng ngủ',
+    'listing2.tags.1': 'Đánh giá tốt',
+    'listing2.tags.2': 'Nhận phòng dễ dàng',
+    'listing2.check': 'Kiểm tra',
+    'listing2.book': 'Đặt ngay',
+    'listing2.reviews.0.name': 'Zeyad',
+    'listing2.reviews.0.date': 'Tháng 10 2025',
+    'listing2.reviews.0': 'Amy là một chủ nhà rất thân thiện và chào đón! Chúng tôi đã đưa ra một vài yêu cầu để chuyến lưu trú trở nên dễ dàng hơn với thời gian và số lượng hành lý, và cô ấy đã rất phản hồi nhanh chóng và đáp ứng mọi yêu cầu của chúng tôi, luôn kiểm tra xem chúng tôi có cần gì thêm không!',
+    'listing2.reviews.1.name': 'Brad',
+    'listing2.reviews.1.date': 'Tháng 10 2025',
+    'listing2.reviews.1': 'Nhà rất đẹp, với tầng hầm biệt lập nhưng không cảm giác như tầng hầm. Căn hộ cực kỳ sạch sẽ và thoải mái ngay khi đến. Căn hộ có mọi thứ chúng tôi cần và hơn thế nữa. Chắc chắn sẽ ở lại lần nữa.',
+    'listing2.showMore': 'Xem thêm đánh giá',
+    'listing2.showFewer': 'Thu gọn đánh giá',
+    'contact.title': 'Có câu hỏi trước khi đặt?',
+    'contact.desc': 'Phản hồi nhanh — gửi tin nhắn hoặc gọi chúng tôi. Đặt phòng an toàn qua Airbnb.',
+    'contact.email': 'Liên hệ chủ nhà',
+    'contact.call': 'Gọi',
+    'contact.hostLabel': 'Chủ nhà',
+    'contact.hostName': 'HM Homestay',
+    'contact.response': 'Thời gian phản hồi: trong vài giờ',
+    'footer': '© HM Homestay — Đặt phòng an toàn qua Airbnb'
+  }
+};
+
+// Initialize language from localStorage or default to 'en'
+function setLanguage(lang) {
+  localStorage.setItem('language', lang);
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    element.textContent = texts[lang][key] || element.textContent;
+  });
+  document.querySelectorAll('.show-more').forEach(btn => {
+    const expanded = btn.dataset.expanded === '1';
+    const key = expanded ? btn.getAttribute('data-i18n').replace('showMore', 'showFewer') : btn.getAttribute('data-i18n');
+    btn.textContent = texts[lang][key] || btn.textContent;
+  });
+  document.documentElement.lang = lang;
+}
+
+// Load saved language or default
+const savedLang = localStorage.getItem('language') || 'en';
+document.getElementById('lang-select').value = savedLang;
+setLanguage(savedLang);
+
+// Language change event
+document.getElementById('lang-select').addEventListener('change', (e) => {
+  setLanguage(e.target.value);
+});
+
+// Open Airbnb with optional dates
+function openWithDates(url, checkin, checkout) {
+  let link = url;
+  if (checkin) link += `?check_in=${checkin}`;
+  if (checkout) link += `&check_out=${checkout}`;
+  window.open(link, '_blank');
+}
+
+// Gallery click -> change main media
+document.querySelectorAll('.card').forEach(card => {
+  const media = card.querySelector('.card-media');
+  card.querySelectorAll('.gallery img').forEach(img => {
+    img.addEventListener('click', () => {
+      media.style.backgroundImage = `url('${img.src}')`;
+    });
+  });
+});
+
+// Show more/less reviews
+document.querySelectorAll('.show-more').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const reviews = btn.parentElement.querySelectorAll('.review.hidden');
+    const lang = document.getElementById('lang-select').value;
+    const expanded = btn.dataset.expanded === '1';
+    reviews.forEach(r => r.style.display = expanded ? 'none' : 'block');
+    btn.dataset.expanded = expanded ? '0' : '1';
+    btn.textContent = expanded ? texts[lang][btn.getAttribute('data-i18n')] : texts[lang][btn.getAttribute('data-i18n').replace('showMore', 'showFewer')];
+  });
+});
+
+// Check & Book buttons
+document.querySelectorAll('.card').forEach(card => {
+  const url = card.dataset.url;
+  card.querySelector('.check')?.addEventListener('click', () => {
+    const ci = card.querySelector('.checkin').value;
+    const co = card.querySelector('.checkout').value;
+    openWithDates(url, ci, co);
+  });
+  card.querySelector('.book-now')?.addEventListener('click', () => {
+    const ci = card.querySelector('.checkin').value;
+    const co = card.querySelector('.checkout').value;
+    openWithDates(url, ci, co);
+  });
+});
+
+// Global Check all
+document.getElementById('global-check')?.addEventListener('click', () => {
+  const ci = document.getElementById('global-checkin').value;
+  const co = document.getElementById('global-checkout').value;
+  document.querySelectorAll('.card').forEach(card => {
+    const url = card.dataset.url;
+    openWithDates(url, ci, co);
+  });
+});
+
+// Slideshow with pause/play
+document.querySelectorAll('.card').forEach(card => {
+  const media = card.querySelector('.card-media');
+  const images = card.dataset.images.split(',');
+  let index = 0;
+  let isPaused = false;
+  const slideshow = setInterval(() => {
+    if (!isPaused) {
+      index = (index + 1) % images.length;
+      media.style.backgroundImage = `url('${images[index]}')`;
+    }
+  }, 5000);
+  media.addEventListener('click', () => {
+    isPaused = !isPaused;
+  });
+});
+</script>
+</body>
+</html>
