@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>HM Homestay — Modern</title>
 <meta name="description" content="Book modern, comfortable homestays in Toronto via Airbnb.">
 <meta name="keywords" content="homestay, Toronto, Airbnb, vacation rental">
 <meta property="og:title" content="HM Homestay">
 <meta property="og:description" content="Comfortable stays in Toronto, book securely via Airbnb.">
 <meta property="og:image" content="images/listing1_hero.jpg">
-<link rel="icon" href="images/favicon.ico">
+<link rel="icon" href="images/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -67,8 +67,12 @@ body {
 .meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
 .tag { background: #f3f4f6; padding: 6px 12px; border-radius: 999px; font-size: 13px; color: #111; }
 .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-.date-input { padding: 10px; border-radius: 8px; border: 1px solid #e6e9ef; background: white; font-size: 14px; }
+.date-input {
+  padding: 10px; border-radius: 8px; border: 1px solid #e6e9ef; background: white; font-size: 14px;
+  color: #0f172a; /* Đảm bảo text có màu */
+}
 .date-input:focus { outline: none; border: 2px solid var(--accent); }
+.date-input::placeholder { color: #9ca3af; opacity: 1; } /* Placeholder màu xám nhạt */
 .btn {
   background: var(--accent); color: white; padding: 12px 18px; border-radius: 8px;
   border: none; cursor: pointer; font-weight: 600; font-size: 14px; transition: background 0.2s, transform 0.1s;
@@ -113,6 +117,11 @@ footer { margin-top: 40px; text-align: center; color: var(--muted); font-size: 1
   .row { flex-direction: column; align-items: stretch; }
   .card-title { font-size: 18px; }
   .tag { font-size: 13px; }
+  .date-input {
+    width: 100%; /* Đảm bảo input chiếm toàn bộ chiều rộng trên di động */
+    padding: 10px;
+    font-size: 14px;
+  }
 }
 </style>
 </head>
@@ -150,8 +159,8 @@ footer { margin-top: 40px; text-align: center; color: var(--muted); font-size: 1
         <div class="tag" data-i18n="hero.tags.3">Self check-in</div>
       </div>
       <div style="margin-top:20px;display:flex;gap:10px;align-items:center" class="row">
-        <input id="global-checkin" class="date-input" type="date">
-        <input id="global-checkout" class="date-input" type="date">
+        <input id="global-checkin" class="date-input" type="date" placeholder="Check-in">
+        <input id="global-checkout" class="date-input" type="date" placeholder="Check-out">
         <button id="global-check" class="btn" data-i18n="hero.check">Check all listings</button>
       </div>
     </div>
@@ -205,8 +214,8 @@ footer { margin-top: 40px; text-align: center; color: var(--muted); font-size: 1
           <div class="tag" data-i18n="listing1.tags.2">Fast Wi-Fi</div>
         </div>
         <div style="display:flex;gap:10px;margin-top:10px" class="row">
-          <input class="date-input checkin" type="date" />
-          <input class="date-input checkout" type="date" />
+          <input class="date-input checkin" type="date" placeholder="Check-in">
+          <input class="date-input checkout" type="date" placeholder="Check-out">
           <button class="btn check" data-i18n="listing1.check">Check</button>
           <button class="btn book-now" data-i18n="listing1.book">Book Now</button>
         </div>
@@ -299,8 +308,8 @@ footer { margin-top: 40px; text-align: center; color: var(--muted); font-size: 1
           <div class="tag" data-i18n="listing2.tags.2">Easy check-in</div>
         </div>
         <div style="display:flex;gap:10px;margin-top:10px" class="row">
-          <input class="date-input checkin" type="date" />
-          <input class="date-input checkout" type="date" />
+          <input class="date-input checkin" type="date" placeholder="Check-in">
+          <input class="date-input checkout" type="date" placeholder="Check-out">
           <button class="btn check" data-i18n="listing2.check">Check</button>
           <button class="btn book-now" data-i18n="listing2.book">Book Now</button>
         </div>
